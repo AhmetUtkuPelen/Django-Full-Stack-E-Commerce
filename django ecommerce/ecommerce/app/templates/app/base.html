@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'app/images/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>AUPMerce | {% block title %} {% endblock title %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="{% static 'app/images/logo.png' %}" width="100" height="60" class="rounded">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6 active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Our Products
+                </a>
+                <ul class="dropdown-menu bg-primary text-white">
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'tshirt' %}">T shirts</a></li>
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'wintertshirt' %}">Shirts For Winter</a></li>
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'summertshirt' %}">Shirts For Summer</a></li>
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'winterjacket' %}">Jackets For Winter</a></li>
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'dailyshoes' %}">Daily Shoes</a></li>
+                  <li><a class="dropdown-item text-center fs-6 text-warning" href="{% url 'category' 'jeans' %}">Jeans</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-6 text-white text-center" href="{% url 'about' %}">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-6 text-white text-center" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+            </ul>
+            <i class="bi-emoji-sunglasses fs-3 text-white me-2" id="toggleDark"></i>
+          </div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-white fs-6 text-uppercase" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user}}</a>
+                <ul class="dropdown-menu bg-primary" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item text-warning" href="{% url 'profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item text-warning" href="{% url 'passwordchange' %}">Change Password</a></li>
+                    <li><a class="dropdown-item text-warning" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="{% url 'showcart' %}" class="nav-link text-white fs-6"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span> Cart</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="{% url 'showwishlist' %}" class="nav-link text-white fs-6"><span class="badge bg-danger">{% if wishitem > 0 %} {{wishitem}} {% endif %}</span>  <i class="fa fa-heart"></i></a>
+            </li>
+            {% else %}
+            <li class="nav-item mx-2">
+                <a href="{% url 'login' %}" class="nav-link text-white fs-6">Login</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="{% url 'customerregistration' %}" class="nav-link text-white fs-6">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      {% block banner-slider %}{% endblock banner-slider %}
+      {% block info %}{% endblock info %}
+      {% block main-content %}{% endblock main-content %}
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-primary">© 2024 AUP Tech</span>
+        </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-primary" href="https://github.com/AhmetUtkuPelen" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+            <li class="ms-3"><a class="text-primary" href="https://www.instagram.com/rngd_aup/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+            <li class="ms-3"><a class="text-primary" href="https://tr.linkedin.com/in/ahmet-utku-pelen-4941b820b" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+          </ul>
+        </footer>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+    <script src="{% static 'app/js/script.js' %}"></script>
+</body>
+</html>

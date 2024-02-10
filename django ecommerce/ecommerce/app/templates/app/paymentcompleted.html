@@ -1,0 +1,13 @@
+{% extends "app/base.html." %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-9 offset-sm-1 text-center">
+            <h3 class="text-primary text-capitalize">Thanks For Choosing Us Dear <span class="text-danger">{{request.user.username}}</span></h3>
+            <h3 class="text-success">Your Payment Has Been Received Succesfully</h3>
+            <img src="https://i.pinimg.com/736x/8d/cd/ab/8dcdabdadf9244c3170d9b3c0aa74234.jpg" class="w-25">
+            <h3 class="text-success mt-3"><i class="fa-solid fa-heart text-danger"></i>We Wish You Good Days & Memories Wearing Our Products<i class="fa-solid fa-heart text-danger"></i></h3>
+        </div>
+    </div>
+    </div>
+{% endblock main-content %}

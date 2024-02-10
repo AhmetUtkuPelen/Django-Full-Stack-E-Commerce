@@ -1,0 +1,5 @@
+You cant see the website unless you log in so you need to register and create a user first. Or if you want to to log in as a super user these are the informations you need
+
+=> username = admin
+
+=> password = tech1234
