@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from .forms import*
+from .views import initiate_payment, payment_callback
 
 urlpatterns = [
     path("base/",base,name="base"),
@@ -67,6 +68,11 @@ urlpatterns = [
     path('logout/',user_logout,name="logout"),
     
     path('payment-completed/',paymentCompleted,name="paymentcompleted"),
+
+    path('initiate-payment/', initiate_payment, name='initiate_payment'),
+    
+    path('payment-callback/', payment_callback, name='payment_callback'),
+
         
 ] +static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

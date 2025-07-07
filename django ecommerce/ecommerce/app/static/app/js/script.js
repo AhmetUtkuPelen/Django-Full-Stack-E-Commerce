@@ -92,21 +92,28 @@ $('.remove-cart').click(function(){
 
 
 
-$('.plus-wishlist').click(function(){
+$('.plus-wishlist').click(function(e){
+    e.preventDefault(); // Prevent default link behavior
 
-    let id = $(this).attr("pid").toString
-    
+    let id = $(this).attr("pid").toString()
+    console.log("Plus wishlist clicked, product ID:", id); // Debug log
+
     $.ajax({
         type:'GET',
         url:"/pluswishlist",
         data:{
             prod_id:id
         },
-    
+
         success:function(data){
-    
-            window.location.href = `http://localhost:8000/product-detail/${id}`
-    
+            console.log("Success response:", data); // Debug log
+            alert(data.message); // Show the message
+            window.location.href = `http://127.0.0.1:8000/product-detail/${id}`
+        },
+
+        error:function(xhr, status, error){
+            console.log("Error:", error); // Debug log
+            alert("Error occurred: " + error);
         }
 
     })
@@ -115,26 +122,33 @@ $('.plus-wishlist').click(function(){
 
 
 
-$('.minus-wishlist').click(function(){
-    
-    let id = $(this).attr("pid").toString
-    
+$('.minus-wishlist').click(function(e){
+    e.preventDefault(); // Prevent default link behavior
+
+    let id = $(this).attr("pid").toString()
+    console.log("Minus wishlist clicked, product ID:", id); // Debug log
+
     $.ajax({
         type:"GET",
         url:"/minuswishlist",
         data:{
             prod_id:id
         },
-    
+
         success:function(data){
-    
-            window.location.href= `http://localhost:8000/product-detail/${id}`
-    
+            console.log("Success response:", data); // Debug log
+            alert(data.message); // Show the message
+            window.location.href= `http://127.0.0.1:8000/product-detail/${id}`
+        },
+
+        error:function(xhr, status, error){
+            console.log("Error:", error); // Debug log
+            alert("Error occurred: " + error);
         }
 
     })
 
-})  
+})
 
 // !!! DARK MODE LIGHT MODE CONST !!! \\
 
